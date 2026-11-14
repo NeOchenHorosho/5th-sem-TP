@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>АИС «Почта» — прототип интерфейса</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home">
+        <span class="brand-text">
+          <strong>АИС «Почта»</strong>
+          <small>Портал почтовых отправлений</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Основное меню">
+        <ul>
+          <li><a href="#home">Главная</a></li>
+          <li><a href="#order-new">Оформить отправление</a></li>
+          <li><a href="#orders">Отправления</a></li>
+          <li><a href="#analytics">Аналитика</a></li>
+          <li><a href="#admin">Пользователи</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions"></div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section id="home" class="screen" aria-labelledby="home-title">
+      <div class="hero">
+        <p class="hero-kicker">Вариант 36 · АИС «Почта»</p>
+        <h1 id="home-title">Портал почтовых отправлений</h1>
+        <p>Оформите заявку онлайн, отследите посылку по трек-номеру и получите аналитику по корреспонденции — всё в одном окне.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#order-new">Оформить отправление</a>
+          <a class="btn btn-secondary" href="#orders">Найти отправление</a>
+        </div>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <h2>Оформить заявку</h2>
+          <p class="muted">Электронная форма заменяет бумажный бланк в отделении — регистрация занимает до 2 минут.</p>
+          <a class="card-link" href="#order-new">Перейти к форме →</a>
+        </article>
+        <article class="card">
+          <h2>Отследить отправление</h2>
+          <p class="muted">Поиск по трек-номеру, фильтры по статусу и дате, история движения посылки.</p>
+          <a class="card-link" href="#orders">Открыть список →</a>
+        </article>
+        <article class="card">
+          <h2>Аналитика</h2>
+          <p class="muted">Четыре сводных показателя по корреспонденции за период для руководителя.</p>
+          <a class="card-link" href="#analytics">Смотреть отчёт →</a>
+        </article>
+        <article class="card">
+          <h2>Пользователи</h2>
+          <p class="muted">Учётные записи клиентов, операторов, курьеров и руководителей.</p>
+          <a class="card-link" href="#admin">Управление →</a>
+        </article>
+      </div>
+
+      <section class="panel" aria-labelledby="map-title">
+        <h2 id="map-title">Карта экранов прототипа</h2>
+        <p class="muted">Ссылки ниже показывают связи между экранами и работают как обычные переходы.</p>
+        <ul class="screen-map">
+          <li><a href="#home">Главная</a> <span class="arrow">→</span> <a href="#login">Авторизация</a> — кнопка «Войти» в шапке.</li>
+          <li><a href="#home">Главная</a> <span class="arrow">→</span> <a href="#order-new">Оформление отправления</a> — кнопка «Оформить отправление».</li>
+          <li><a href="#order-new">Оформление</a> <span class="arrow">→</span> <a href="#orders">Список отправлений</a> — после сохранения заявки.</li>
+          <li><a href="#orders">Список</a> <span class="arrow">→</span> <a href="#order-view">Карточка отправления</a> — ссылка «Открыть» в строке.</li>
+          <li><a href="#order-view">Карточка</a> <span class="arrow">→</span> <a href="#order-edit">Редактирование</a> <span class="arrow">/</span> <a href="#delete">Удаление</a>.</li>
+          <li><a href="#admin">Пользователи</a> <span class="arrow">→</span> <a href="#delete">Подтверждение удаления</a> — общий экран для заказов и пользователей.</li>
+          <li><a href="#orders">Любой экран</a> <span class="arrow">→</span> <a href="#error">Ошибка</a> — при сбое загрузки данных.</li>
+        </ul>
+      </section>
+
+    </section>
+
+    <section id="login" class="screen" aria-labelledby="login-title">
+      <div class="auth-wrap">
+        <form class="card auth-card" aria-labelledby="login-title">
+          <h1 id="login-title">Вход в систему</h1>
+          <p class="muted">Доступ для клиентов и сотрудников организации.</p>
+
+          <div class="field">
+            <label for="login-email">E-mail или телефон</label>
+            <input id="login-email" type="text" autocomplete="username" placeholder="name@example.by">
+          </div>
+
+          <div class="field">
+            <label for="login-password">Пароль</label>
+            <input id="login-password" type="password" autocomplete="current-password" placeholder="••••••••">
+          </div>
+
+          <div class="field">
+            <label for="login-role">Роль</label>
+            <select id="login-role">
+              <option>Клиент</option>
+              <option>Оператор отделения</option>
+              <option>Курьер</option>
+              <option>Руководитель</option>
+            </select>
+          </div>
+
+          <label class="radio"><input type="checkbox"> Запомнить меня на этом устройстве</label>
+
+          <div class="form-actions">
+            <a class="btn btn-primary" href="#home">Войти</a>
+            <a class="btn btn-secondary" href="#home">Отмена</a>
+          </div>
+
+          <p class="note"><strong>Link to main page:</strong> кнопка «Войти» ведёт на главную; проверка логина и пароля выполняется на сервере.</p>
+        </form>
+
+        <p class="muted small">Нет учётной записи? <a href="#order-new">Оформите заявку как гость</a> — регистрация не требуется.</p>
+      </div>
+    </section>
+
+    <section id="order-new" class="screen" aria-labelledby="order-new-title">
+      <div class="page-head">
+        <div>
+          <h1 id="order-new-title">Оформление отправления</h1>
+          <p>Заполните параметры посылки — стоимость пересылки рассчитывается автоматически.</p>
+        </div>
+        <a class="btn btn-secondary btn-sm" href="#orders">К списку отправлений</a>
+      </div>
+
+      <form class="order-form" aria-label="Форма создания заявки">
+        <fieldset>
+          <legend>1. Параметры отправления</legend>
+          <div class="form-grid">
+            <div class="field">
+              <label for="new-type">Тип отправления</label>
+              <select id="new-type">
+                <option>Посылка</option>
+                <option>Бандероль</option>
+                <option>Письмо</option>
+                <option>Экспресс-отправление</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="new-weight">Вес, кг</label>
+              <input id="new-weight" type="number" min="0.1" step="0.1" value="2.4">
+            </div>
+            <div class="field">
+              <label for="new-size">Габариты, см</label>
+              <input id="new-size" type="text" placeholder="40 × 30 × 20">
+            </div>
+            <div class="field">
+              <label for="new-value">Объявленная ценность, BYN</label>
+              <input id="new-value" type="number" min="0" step="0.01" value="150.00">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>2. Отправитель</legend>
+          <div class="form-grid">
+            <div class="field">
+              <label for="new-sender-name">ФИО отправителя</label>
+              <input id="new-sender-name" type="text" placeholder="Иванов Иван Иванович">
+            </div>
+            <div class="field">
+              <label for="new-sender-phone">Телефон</label>
+              <input id="new-sender-phone" type="tel" placeholder="+375 29 123-45-67">
+            </div>
+            <div class="field full">
+              <label for="new-sender-address">Адрес отправления</label>
+              <input id="new-sender-address" type="text" placeholder="г. Минск, ул. Ленина, 10, кв. 5">
+            </div>
+            <div class="field">
+              <label for="new-sender-index">Почтовый индекс</label>
+              <input id="new-sender-index" type="text" inputmode="numeric" maxlength="6" placeholder="220000">
+            </div>
+            <div class="field">
+              <label for="new-sender-email">E-mail для уведомлений</label>
+              <input id="new-sender-email" type="email" placeholder="name@example.by">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>3. Получатель</legend>
+          <div class="form-grid">
+            <div class="field">
+              <label for="new-recipient-name">ФИО получателя</label>
+              <input id="new-recipient-name" type="text" placeholder="Чарльз Миллз Мэнсон">
+            </div>
+            <div class="field">
+              <label for="new-recipient-phone">Телефон</label>
+              <input id="new-recipient-phone" type="tel" placeholder="+375 29 765-43-21">
+            </div>
+            <div class="field full">
+              <label for="new-recipient-address">Адрес получения</label>
+              <input id="new-recipient-address" type="text" placeholder="г. Гомель, ул. Советская, 25, кв. 8">
+            </div>
+            <div class="field">
+              <label for="new-recipient-index">Почтовый индекс</label>
+              <input id="new-recipient-index" type="text" inputmode="numeric" maxlength="6" placeholder="246000">
+            </div>
+            <div class="field">
+              <label for="new-recipient-email">E-mail для уведомлений</label>
+              <input id="new-recipient-email" type="email" placeholder="name@example.by">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>4. Передача и получение</legend>
+          <div class="form-grid">
+            <div class="field">
+              <p class="field-label">Как передать отправление</p>
+              <div class="radio-row">
+                <label class="radio"><input type="radio" name="handover" checked> В отделении связи</label>
+                <label class="radio"><input type="radio" name="handover"> Вызвать курьера</label>
+              </div>
+            </div>
+            <div class="field">
+              <p class="field-label">Как получит адресат</p>
+              <div class="radio-row">
+                <label class="radio"><input type="radio" name="receipt" checked> В отделении связи</label>
+                <label class="radio"><input type="radio" name="receipt"> Курьером до двери</label>
+              </div>
+            </div>
+          </div>
+          <p class="note"><strong>Вызов курьера:</strong> при выборе этого пункта курьер предварительно позвонит по указанному телефону и согласует время прибытия.</p>
+        </fieldset>
+
+        <fieldset>
+          <legend>5. Оплата</legend>
+          <div class="radio-row">
+            <label class="radio"><input type="radio" name="payment" checked> Наличными при передаче</label>
+            <label class="radio"><input type="radio" name="payment"> Банковский перевод онлайн</label>
+            <label class="radio"><input type="radio" name="payment"> Картой через кассу курьера</label>
+          </div>
+          <p class="note"><strong>Link to payment gateway:</strong> при выборе банковского перевода откроется защищённый платёжный шлюз банка. Оплата картой через кассу курьера доступна только при курьерской доставке.</p>
+        </fieldset>
+
+        <div class="summary">
+          <div>
+            <span class="muted">Стоимость пересылки</span>
+            <strong>12,50 BYN</strong>
+          </div>
+          <div>
+            <span class="muted">Трек-номер</span>
+            <strong>будет присвоен после оформления</strong>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <a class="btn btn-primary" href="#orders">Оформить заявку</a>
+          <a class="btn btn-secondary" href="#home">Отмена</a>
+        </div>
+        <p class="note"><strong>Button «Оформить заявку»:</strong> создаёт заказ, присваивает трек-номер и открывает список отправлений. Пока выполняется переход-заглушка.</p>
+      </form>
+    </section>
+
+    <section id="orders" class="screen" aria-labelledby="orders-title">
+      <div class="page-head">
+        <div>
+          <h1 id="orders-title">Отправления</h1>
+          <p>Поиск, фильтрация и просмотр всех заказов организации.</p>
+        </div>
+        <a class="btn btn-primary btn-sm" href="#order-new">+ Новое отправление</a>
+      </div>
+
+      <form class="filters" aria-label="Фильтры поиска">
+        <div class="field">
+          <label for="f-track">Трек-номер</label>
+          <input id="f-track" type="search" placeholder="Введите трек-номер">
+        </div>
+        <div class="field">
+          <label for="f-status">Статус</label>
+          <select id="f-status">
+            <option>Все статусы</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-type">Тип</label>
+          <select id="f-type">
+            <option>Все типы</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-date">Дата создания</label>
+          <input id="f-date" type="date">
+        </div>
+        <div class="filter-actions">
+          <button class="btn btn-primary" type="button">Найти</button>
+          <a class="btn btn-secondary" href="#orders">Сбросить</a>
+        </div>
+      </form>
+      <p class="note"><strong>Фильтрация:</strong> кнопка «Найти» применяет условия поиска (обработка на стороне JS), «Сбросить» возвращает полный список.</p>
+
+      <div class="sort-bar" role="group" aria-label="Сортировка списка">
+        <span>Сортировать:</span>
+        <button class="btn btn-sm is-active" type="button">По дате ↓</button>
+        <button class="btn btn-sm" type="button">По сумме ↑</button>
+        <button class="btn btn-sm" type="button">По трек-номеру</button>
+      </div>
+      <p class="note"><strong>Сортировка:</strong> кнопки меняют порядок строк, выбранный вариант подсвечивается. Повторное нажатие меняет направление.</p>
+
+      <ul class="data-table" aria-label="Список отправлений">
+        <li class="data-row data-head" aria-hidden="true">
+          <span>Трек-номер</span>
+          <span>Получатель</span>
+          <span>Тип</span>
+          <span>Статус</span>
+          <span>Сумма</span>
+          <span>Действия</span>
+        </li>
+      </ul>
+
+      <p id="orders-count" class="muted small">Показано 0 из 0</p>
+
+    </section>
+
+    <section id="order-view" class="screen" aria-labelledby="order-view-title">
+      <nav class="breadcrumbs" aria-label="Хлебные крошки">
+        <a href="#home">Главная</a> <span>/</span>
+        <a href="#orders">Отправления</a> <span>/</span>
+        <span>—</span>
+      </nav>
+
+      <div class="page-head">
+        <div>
+          <h1 id="order-view-title">Карточка отправления</h1>
+          <p>Данные загружаются из модели</p>
+        </div>
+        <div class="page-actions">
+          <a class="btn btn-secondary btn-sm" href="#orders">← К списку</a>
+          <a class="btn btn-secondary btn-sm" href="#order-edit">Редактировать</a>
+          <a class="btn btn-danger btn-sm" href="#delete">Удалить</a>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+        <section class="card" aria-labelledby="order-details-title">
+          <h2 id="order-details-title">Параметры отправления</h2>
+          <dl class="details">
+            <div><dt>Тип</dt><dd data-field="type">—</dd></div>
+            <div><dt>Вес</dt><dd data-field="weight">—</dd></div>
+            <div><dt>Габариты</dt><dd data-field="dimensions">—</dd></div>
+            <div><dt>Объявленная ценность</dt><dd data-field="declaredValue">—</dd></div>
+            <div><dt>Отправитель</dt><dd data-field="senderName">—</dd></div>
+            <div><dt>Телефон отправителя</dt><dd data-field="senderPhone">—</dd></div>
+            <div><dt>Получатель</dt><dd data-field="recipientName">—</dd></div>
+            <div><dt>Телефон получателя</dt><dd data-field="recipientPhone">—</dd></div>
+            <div class="full"><dt>Адрес получения</dt><dd data-field="recipientAddress">—</dd></div>
+            <div><dt>Способ получения</dt><dd data-field="deliveryMethod">—</dd></div>
+            <div><dt>Оплата</dt><dd data-field="payment">—</dd></div>
+            <div><dt>Стоимость</dt><dd data-field="cost">—</dd></div>
+          </dl>
+        </section>
+
+        <section class="card" aria-labelledby="order-history-title">
+          <h2 id="order-history-title">История статусов</h2>
+          <ol id="order-history" class="timeline"></ol>
+        </section>
+      </div>
+
+      <p class="note"><strong>Уведомления:</strong> при прибытии посылки в пункт выдачи система автоматически отправляет SMS или сообщение в мессенджер. Отметку о вручении курьер ставит в мобильном приложении.</p>
+    </section>
+
+    <section id="order-edit" class="screen" aria-labelledby="order-edit-title">
+      <nav class="breadcrumbs" aria-label="Хлебные крошки">
+        <a href="#orders">Отправления</a> <span>/</span>
+        <a href="#order-view">Карточка</a> <span>/</span>
+        <span>Редактирование</span>
+      </nav>
+
+      <div class="page-head">
+        <div>
+          <h1 id="order-edit-title">Редактирование отправления</h1>
+          <p>Изменения сохраняются в журнале аудита.</p>
+        </div>
+        <a class="btn btn-secondary btn-sm" href="#order-view">← К карточке</a>
+      </div>
+
+      <form class="order-form" aria-label="Форма редактирования заявки">
+        <fieldset>
+          <legend>1. Параметры отправления</legend>
+          <div class="form-grid">
+            <div class="field">
+              <label for="edit-type">Тип отправления</label>
+              <select id="edit-type">
+                <option selected>Посылка</option>
+                <option>Бандероль</option>
+                <option>Письмо</option>
+                <option>Экспресс-отправление</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="edit-weight">Вес, кг</label>
+              <input id="edit-weight" type="number" min="0.1" step="0.1">
+            </div>
+            <div class="field">
+              <label for="edit-size">Габариты, см</label>
+              <input id="edit-size" type="text">
+            </div>
+            <div class="field">
+              <label for="edit-value">Объявленная ценность, BYN</label>
+              <input id="edit-value" type="number" min="0" step="0.01">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>2. Получатель</legend>
+          <div class="form-grid">
+            <div class="field">
+              <label for="edit-recipient-name">ФИО получателя</label>
+              <input id="edit-recipient-name" type="text">
+            </div>
+            <div class="field">
+              <label for="edit-recipient-phone">Телефон</label>
+              <input id="edit-recipient-phone" type="tel">
+            </div>
+            <div class="field full">
+              <label for="edit-recipient-address">Адрес получения</label>
+              <input id="edit-recipient-address" type="text">
+            </div>
+            <div class="field">
+              <label for="edit-recipient-index">Почтовый индекс</label>
+              <input id="edit-recipient-index" type="text" inputmode="numeric" maxlength="6">
+            </div>
+            <div class="field">
+              <label for="edit-recipient-email">E-mail для уведомлений</label>
+              <input id="edit-recipient-email" type="email" placeholder="name@example.by">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>3. Доставка и оплата</legend>
+          <div class="form-grid">
+            <div class="field">
+              <label for="edit-delivery">Способ получения</label>
+              <select id="edit-delivery">
+                <option selected>Курьером до двери</option>
+                <option>В отделении связи</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="edit-payment">Способ оплаты</label>
+              <select id="edit-payment">
+                <option selected>Банковский перевод онлайн</option>
+                <option>Наличными при передаче</option>
+                <option>Картой через кассу курьера</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <a class="btn btn-primary" href="#order-view">Сохранить изменения</a>
+          <a class="btn btn-secondary" href="#order-view">Отмена</a>
+        </div>
+        <p class="note"><strong>Button «Сохранить изменения»:</strong> записывает новые значения и возвращает к карточке. Кнопка «Отмена» закрывает форму без сохранения.</p>
+      </form>
+    </section>
+
+    <section id="delete" class="screen" aria-labelledby="delete-title">
+      <div class="page-head">
+        <div>
+          <h1 id="delete-title">Подтверждение удаления</h1>
+          <p>Действие нельзя отменить.</p>
+        </div>
+      </div>
+
+      <div class="card confirm-card">
+        <p class="confirm-icon" aria-hidden="true">!</p>
+        <h2>Удалить отправление?</h2>
+        <p class="muted">Запись будет помечена как аннулированная и скрыта из списков. История статусов и данные об оплате сохранятся в архиве согласно 10-летнему сроку хранения.</p>
+        <div class="form-actions">
+          <a class="btn btn-danger" href="#orders">Удалить</a>
+          <a class="btn btn-secondary" href="#order-view">Отмена</a>
+        </div>
+        <p class="note"><strong>Link to:</strong> после удаления открывается список отправлений. Этот же экран используется для удаления пользователя («Пользователи» → «Удалить»).</p>
+      </div>
+    </section>
+
+    <section id="analytics" class="screen" aria-labelledby="analytics-title">
+      <div class="page-head">
+        <div>
+          <h1 id="analytics-title">Аналитическая отчётность</h1>
+          <p>Доступно руководителю организации. Сводные показатели по корреспонденции за период.</p>
+        </div>
+      </div>
+
+      <form class="filters" aria-label="Параметры отчёта">
+        <div class="field">
+          <label for="a-from">Период с</label>
+          <input id="a-from" type="date" value="2026-01-01">
+        </div>
+        <div class="field">
+          <label for="a-to">по</label>
+          <input id="a-to" type="date" value="2026-09-30">
+        </div>
+        <div class="field">
+          <label for="a-branch">Филиал</label>
+          <select id="a-branch">
+            <option>Вся организация</option>
+            <option>Минское отделение</option>
+            <option>Гомельское отделение</option>
+            <option>Брестское отделение</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button class="btn btn-primary" type="button">Построить отчёт</button>
+          <a class="btn btn-secondary" href="#analytics">Сбросить</a>
+        </div>
+      </form>
+
+      <div class="metrics">
+        <article class="metric">
+          <span class="metric-label">Пришло корреспонденции</span>
+          <strong>18 420</strong>
+          <span class="muted small">поступило в сеть за период</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Отправлено корреспонденции</span>
+          <strong>16 980</strong>
+          <span class="muted small">вручено адресатам</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Возвращено отправителям</span>
+          <strong>640</strong>
+          <span class="muted small">по истечении срока хранения</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Невостребовано</span>
+          <strong>312</strong>
+          <span class="muted small">получатель не пришёл в ОПС</span>
+        </article>
+      </div>
+
+      <section class="card chart-card" aria-labelledby="chart-title">
+        <h2 id="chart-title">Динамика обработанной корреспонденции</h2>
+        <div class="chart" role="img" aria-label="Столбчатая диаграмма: июль — 62 процента, август — 74 процента, сентябрь — 88 процентов от максимума.">
+          <div class="bar"><span style="--h: 62%"></span>Июл</div>
+          <div class="bar"><span style="--h: 74%"></span>Авг</div>
+          <div class="bar"><span style="--h: 88%"></span>Сен</div>
+          <div class="bar"><span style="--h: 70%"></span>Окт</div>
+          <div class="bar"><span style="--h: 95%"></span>Ноя</div>
+          <div class="bar"><span style="--h: 81%"></span>Дек</div>
+        </div>
+      </section>
+
+      <div class="page-actions">
+        <button class="btn btn-secondary" type="button">Экспорт в PDF</button>
+        <button class="btn btn-secondary" type="button">Экспорт в Excel</button>
+      </div>
+
+    </section>
+
+    <section id="admin" class="screen" aria-labelledby="admin-title">
+      <div class="page-head">
+        <div>
+          <h1 id="admin-title">Пользователи</h1>
+          <p>Управление учётными записями клиентов и сотрудников организации.</p>
+        </div>
+      </div>
+
+      <section class="card" aria-labelledby="user-form-title">
+        <h2 id="user-form-title">Добавить пользователя</h2>
+        <form class="form-grid" aria-label="Форма добавления пользователя">
+          <div class="field">
+            <label for="user-name">ФИО</label>
+            <input id="user-name" type="text" placeholder="Соколовский Ян">
+          </div>
+          <div class="field">
+            <label for="user-email">E-mail</label>
+            <input id="user-email" type="email" placeholder="name@example.by">
+          </div>
+          <div class="field">
+            <label for="user-role">Роль</label>
+            <select id="user-role">
+              <option>Клиент</option>
+              <option>Оператор отделения</option>
+              <option>Курьер</option>
+              <option>Руководитель</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="user-password">Пароль</label>
+            <input id="user-password" type="password" placeholder="Минимум 8 символов">
+          </div>
+        </form>
+        <div class="form-actions">
+          <a class="btn btn-primary" href="#admin">Добавить</a>
+          <a class="btn btn-secondary" href="#admin">Очистить</a>
+        </div>
+        <p class="note"><strong>Edit mode:</strong> эта же форма используется для редактирования — кнопка «Изменить» в списке заполняет поля текущими данными пользователя.</p>
+      </section>
+
+      <section class="card" aria-labelledby="user-list-title">
+        <h2 id="user-list-title">Список пользователей</h2>
+        <ul class="data-table user-table" aria-label="Список пользователей">
+          <li class="data-row data-head" aria-hidden="true">
+            <span>ФИО</span>
+            <span>Роль</span>
+            <span>E-mail</span>
+            <span>Статус</span>
+            <span>Действия</span>
+          </li>
+          <li class="data-row">
+            <span data-label="ФИО">Соколовский Ян</span>
+            <span data-label="Роль">Курьер</span>
+            <span data-label="E-mail">sokolovsky@proton.by</span>
+            <span data-label="Статус"><span class="badge">Активен</span></span>
+            <span class="row-actions">
+              <a href="#admin">Изменить</a>
+              <a href="#delete">Удалить</a>
+            </span>
+          </li>
+          <li class="data-row">
+            <span data-label="ФИО">Ясинский Кирилл</span>
+            <span data-label="Роль">Оператор отделения</span>
+            <span data-label="E-mail">yasinsky@proton.by</span>
+            <span data-label="Статус"><span class="badge">Активен</span></span>
+            <span class="row-actions">
+              <a href="#admin">Изменить</a>
+              <a href="#delete">Удалить</a>
+            </span>
+          </li>
+          <li class="data-row">
+            <span data-label="ФИО">Чарльз Миллз Мэнсон</span>
+            <span data-label="Роль">Клиент</span>
+            <span data-label="E-mail">charlie@haha.com</span>
+            <span data-label="Статус"><span class="badge">Заблокирован</span></span>
+            <span class="row-actions">
+              <a href="#admin">Изменить</a>
+              <a href="#delete">Удалить</a>
+            </span>
+          </li>
+        </ul>
+      </section>
+    </section>
+
+    <section id="error" class="screen" aria-labelledby="error-title">
+      <div class="error-card">
+        <p class="error-code">404</p>
+        <h1 id="error-title">Страница не найдена</h1>
+        <p class="muted">Возможно, адрес указан неверно или запись была удалена. Проверьте ссылку и попробуйте снова.</p>
+        <div class="form-actions">
+          <a class="btn btn-primary" href="#home">На главную</a>
+          <a class="btn btn-secondary" href="#orders">К списку отправлений</a>
+        </div>
+        <p class="note"><strong>Same screen for 500:</strong> при ошибке сервера показывается этот же экран с кодом 500 и текстом «Сервис временно недоступен».</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-brand">АИС «Почта»</p>
+        <p>Автоматизированная система учёта и перевозки почтовых отправлений.</p>
+      </div>
+      <nav aria-label="Ссылки в подвале">
+        <ul class="footer-links">
+          <li><a href="#home">Главная</a></li>
+          <li><a href="#orders">Отправления</a></li>
+          <li><a href="#analytics">Аналитика</a></li>
+          <li><a href="#login">Вход</a></li>
+          <li><a href="#error">Пример ошибки 404</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p>© 2026 АИС «Почта».</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="model.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
